@@ -61,73 +61,78 @@
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect';
-import search from '../services/search';
+  import Multiselect from 'vue-multiselect';
+  import search from '../services/search';
 
-export default {
-  components: { Multiselect },
-  data() {
-    return {
-      msg: 'Hello World!',
-      departureDate: '',
-      returnDate: '',
-      destinations: [
-        'San Francisco', 'New York', 'Wroclaw', 'Moon',
-        'Mars', 'Pluto', 'Tatooine', 'Hooth', 'Naboo',
-        'Turkana IV', 'Nimbus III', 'Vulcan', 'Amazonia',
-        'Doohan 6', 'Eternium', 'Kronos', 'Tokyo',
-      ],
-      prices: [
-        '$0 - $10,000',
-        '$10,0001 - $100,000',
-        '$100,001 - $500,000',
-        '$500,001 - $1,000,000',
-      ],
-      selectedFromDestination: '',
-      selectedToDestination: '',
-      priceRange: '',
-    };
-  },
-  methods: {
-    updateFromDestination(destination) {
-      this.selectedFromDestination = destination;
+  export default {
+    components: { Multiselect },
+    data() {
+      return {
+        msg: 'Hello World!',
+        departureDate: '',
+        returnDate: '',
+        destinations: [
+          'San Francisco', 'New York', 'Wroclaw', 'Moon',
+          'Mars', 'Pluto', 'Tatooine', 'Hooth', 'Naboo',
+          'Turkana IV', 'Nimbus III', 'Vulcan', 'Amazonia',
+          'Doohan 6', 'Eternium', 'Kronos', 'Tokyo',
+        ],
+        prices: [
+          '$0 - $10,000',
+          '$10,0001 - $100,000',
+          '$100,001 - $500,000',
+          '$500,001 - $1,000,000',
+        ],
+        selectedFromDestination: '',
+        selectedToDestination: '',
+        priceRange: '',
+      };
     },
-    updateToDestination(destination) {
-      this.selectedToDestination = destination;
+    watch: {
+      selectedFromDestination(val) {
+        this.destinations = search.updateToDestination(val);
+      },
     },
-    updatePrice(price) {
-      this.priceRange = price;
+    methods: {
+      updateFromDestination(destination) {
+        this.selectedFromDestination = destination;
+      },
+      updateToDestination(destination) {
+        this.selectedToDestination = destination;
+      },
+      updatePrice(price) {
+        this.priceRange = price;
+      },
     },
-  },
-};
+  };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  color: #42b983;
-}
+  h1 {
+    color: #42b983;
+  }
 
-p {
-  text-align: left;
-}
+  p {
+    text-align: left;
+  }
 
-.date-input {
-  background-color: white !important;
-  border: none !important;
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
-  padding-left: 5% !important;
-  width: 50vw;
-  color: black;
-}
+  .date-input {
+    background-color: white !important;
+    border: none !important;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+    padding-left: 5% !important;
+    width: 50vw;
+    color: black;
+  }
 
-.date-input:hover {
-  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21) !important;
-}
+  .date-input:hover {
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21) !important;
+  }
 
-.select-label {
-  color: white;
-  font-size: 1em;
-}
+  .select-label {
+    color: white;
+    font-size: 1em;
+  }
 
 </style>
