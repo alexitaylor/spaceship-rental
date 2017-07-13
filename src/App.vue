@@ -2,7 +2,14 @@
   <div id="app">
     <div class="container">
       <img class="logo" src="./assets/logo.png">
-      <home></home>
+      <p>
+        <!-- use v-link directive for navigation. -->
+        <a v-link="{ path: '/foo' }">Go to Foo</a>
+        <a v-link="{ path: '/bar' }">Go to Bar</a>
+      </p>
+      <!-- use router-view element as route outlet -->
+      <router-view></router-view>
+      <!--<home></home>-->
     </div>
   </div>
 </template>
@@ -11,6 +18,7 @@
 import Home from './components/Home';
 
 export default {
+  name: 'app',
   components: {
     Home,
   },

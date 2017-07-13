@@ -5,12 +5,7 @@
     <div class="row">
       <div class="col s12">
         <div class="card-panel teal">
-          <span class="white-text">Search Feature
-            <h6>departureDate: {{ departureDate }}</h6>
-            <h6>returnDate: {{ returnDate }}</h6>
-            <h6>from: {{ selectedFromDestination }}</h6>
-            <h6>To: {{ selectedToDestination }}</h6>
-            <h6>priceRange: {{ priceRange }}</h6>
+          <span class="white-text">
             <div class="row">
               <div class="col s6"><p>Departure Date</p></div>
               <div class="col s6"><p>Return Date</p></div>
@@ -51,6 +46,8 @@
                 </multiselect>
               </div>
             </div>
+
+            <a class="waves-effect waves-light btn">Search</a>
 
           </span>
         </div>
