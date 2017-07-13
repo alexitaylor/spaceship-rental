@@ -40,6 +40,19 @@
               </div>
             </div>
 
+            <div class="row">
+              <div class="col s6">
+                <multiselect
+                  :selected="selected",
+                  :options="prices",
+                  :searchable="false",
+                  @update="updatePrice"
+                  placeholder="Select price range"
+                >
+                </multiselect>
+              </div>
+            </div>
+
           </span>
         </div>
       </div>
@@ -64,6 +77,12 @@ export default {
         'Turkana IV', 'Nimbus III', 'Vulcan', 'Amazonia',
         'Doohan 6', 'Eternium', 'Kronos', 'Tokyo',
       ],
+      prices: [
+        '$0 - $10,000',
+        '$10,0001 - $100,000',
+        '$100,001 - $500,000',
+        '$500,001 - $1,000,000',
+      ],
       selectedFromDestination: '',
       selectedToDestination: '',
       priceRange: '',
@@ -75,6 +94,9 @@ export default {
     },
     updateToDestination(destination) {
       this.selectedToDestination = destination;
+    },
+    updatePrice(price) {
+      this.priceRange = price;
     },
   },
 };
