@@ -2,20 +2,21 @@ import spaceships from '../data/spaceships';
 import _ from 'lodash';
 
 export default {
-  updateToDestination: (fromDestination) => {
-    const updatedToDestination = [];
+  updateDestination: (destination) => {
+    const updatedDestination = [];
     _.forEach(spaceships.spaceships, (spaceship) => {
-      if (spaceship.destinations.includes(fromDestination)) {
+      if (spaceship.destinations.includes(destination)) {
         _.forEach(spaceship.destinations, (place) => {
-          if (!updatedToDestination.includes(place) && place !== fromDestination) {
-            updatedToDestination.push(place);
+          if (!updatedDestination.includes(place) && place !== destination) {
+            updatedDestination.push(place);
           }
         });
       }
     });
-    return updatedToDestination;
+    updatedDestination.unshift(destination);
+    return updatedDestination;
   },
-  updatePriceRange: (toDestination, fromDestination) => {
+  updatePriceRange: (destinationOne, destinationTwo) => {
     const priceRange = [];
 
     const prices =
@@ -26,8 +27,8 @@ export default {
         4: '$500,001 - $1,000,000',
       };
     _.forEach(spaceships.spaceships, (spaceship) => {
-      const isToDestination = spaceship.destinations.includes(toDestination);
-      const isFromDestination = spaceship.destinations.includes(fromDestination);
+      const isToDestination = spaceship.destinations.includes(destinationOne);
+      const isFromDestination = spaceship.destinations.includes(destinationTwo);
       if (isToDestination && isFromDestination) {
         if (spaceship.price <= 10000) {
           priceRange.push(prices[1]);
@@ -40,7 +41,6 @@ export default {
         }
       }
     });
-    console.log('============', priceRange);
     return priceRange;
   },
 };

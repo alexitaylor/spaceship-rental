@@ -11,7 +11,6 @@
             <h6>from: {{ selectedFromDestination }}</h6>
             <h6>To: {{ selectedToDestination }}</h6>
             <h6>priceRange: {{ priceRange }}</h6>
-            <h6>destinations: {{ destinations.length }}</h6>
             <div class="row">
               <div class="col s6"><p>Departure Date</p></div>
               <div class="col s6"><p>Return Date</p></div>
@@ -23,7 +22,7 @@
               <div class="col s6">
                 <multiselect
                   :selected="selected",
-                  :options="destinations",
+                  :options="fromDestinations",
                   @update="updateFromDestination",
                   placeholder="Select From",
                 >
@@ -32,7 +31,7 @@
               <div class="col s6">
                 <multiselect
                   :selected="selected",
-                  :options="destinations",
+                  :options="toDestinations",
                   @update="updateToDestination",
                   placeholder="Select To",
                 >
@@ -71,29 +70,47 @@
         msg: 'Hello World!',
         departureDate: '',
         returnDate: '',
-        destinations: [
+        selectedFromDestination: '',
+        selectedToDestination: '',
+        priceRange: '',
+        fromDestinations: [],
+        toDestinations: [],
+        prices: [],
+        allDestinations: [
           'San Francisco', 'New York', 'Wroclaw', 'Moon',
           'Mars', 'Pluto', 'Tatooine', 'Hooth', 'Naboo',
           'Turkana IV', 'Nimbus III', 'Vulcan', 'Amazonia',
           'Doohan 6', 'Eternium', 'Kronos', 'Tokyo',
         ],
-        prices: [
+        allPrices: [
           '$0 - $10,000',
           '$10,0001 - $100,000',
           '$100,001 - $500,000',
           '$500,001 - $1,000,000',
         ],
-        selectedFromDestination: '',
-        selectedToDestination: '',
-        priceRange: '',
       };
+    },
+    created() {
+      this.fromDestinations = this.allDestinations;
+      this.toDestinations = this.allDestinations;
+      this.prices = this.allPrices;
     },
     watch: {
       selectedFromDestination(val) {
-        this.destinations = search.updateToDestination(val);
+        if (val === null) {
+          this.destinations = this.allDestinations;
+        } else {
+          this.toDestinations = search.updateDestination(val);
+          this.prices = search.updatePriceRange(val, this.selectedToDestination);
+        }
       },
       selectedToDestination(val) {
-        this.prices = search.updatePriceRange(val, this.selectedFromDestination);
+        if (val === null) {
+          this.destinations = this.allDestinations;
+        } else {
+          this.fromDestinations = search.updateDestination(val);
+          this.prices = search.updatePriceRange(val, this.selectedFromDestination);
+        }
       },
     },
     methods: {
