@@ -2,17 +2,17 @@
   <div id="app">
     <div class="container">
       <img class="logo" src="./assets/logo.png">
-      <hello></hello>
+      <home></home>
     </div>
   </div>
 </template>
 
 <script>
-import Hello from './components/Home';
+import Home from './components/Home';
 
 export default {
   components: {
-    Hello,
+    Home,
   },
 };
 </script>
