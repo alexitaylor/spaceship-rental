@@ -1,17 +1,10 @@
 import Vue from 'vue';
 import App from './App';
 import VueRouter from 'vue-router';
+import Home from './components/Home.vue';
+import SpaceshipList from './components/spaceshipList.vue';
 
 Vue.use(VueRouter);
-
-// Define some components
-const Foo = Vue.extend({
-  template: '<p>This is foo!</p>',
-});
-
-const Bar = Vue.extend({
-  template: '<p>This is bar!</p>',
-});
 
 // Create a router instance.
 // You can pass in additional options here, but let's
@@ -24,15 +17,15 @@ const router = new VueRouter();
 // Vue.extend(), or just a component options object.
 // We'll talk about nested routes later.
 router.map({
-  '/foo': {
-    component: Foo,
+  '/': {
+    component: Home,
   },
-  '/bar': {
-    component: Bar,
+  '/list': {
+    component: SpaceshipList,
   },
 });
 
 // Now we can start the app!
 // The router will create an instance of App and mount to
 // the element matching the selector #app.
-router.start(App, 'body');
+router.start(App, 'app');

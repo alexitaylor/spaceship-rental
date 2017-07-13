@@ -47,7 +47,7 @@
               </div>
             </div>
 
-            <a class="waves-effect waves-light btn">Search</a>
+            <a v-link="{ path: '/list' }" class="waves-effect waves-light btn">Search</a>
 
           </span>
         </div>
