@@ -8,7 +8,7 @@ export default {
       model: 'Dragon',
       description: 'Dragon is a reusable spacecraft developed by SpaceX, ' +
       'an American private space transportation company based in Hawthorne, California.',
-      price: '$800,000',
+      price: 800000,
       passengers: '250',
       destinations: ['Mars', 'San Francisco', 'Moon'],
     },
@@ -17,7 +17,7 @@ export default {
       model: 'Dragon V2',
       description: 'Dragon 2 is the second version of the SpaceX Dragon spacecraft, ' +
       'which will be a human-rated vehicle able to make a terrestrial soft landing.',
-      price: '$600,000',
+      price: 600000,
       passengers: '1500',
       destinations: ['Mars', 'San Francisco', 'Moon', 'New York'],
     },
@@ -26,7 +26,7 @@ export default {
       model: 'Falcon Heavy',
       description: 'Falcon Heavy, previously known as the Falcon 9 Heavy, ' +
       'is a reusable super heavy lift space launch vehicle ',
-      price: '$1,000,000',
+      price: 1000000,
       passengers: '500',
       destinations: ['Mars', 'San Francisco', 'Moon', 'New York', 'Pluto'],
     },
@@ -35,7 +35,7 @@ export default {
       model: 'Falcon',
       description: 'Despite her humble origins and shabby exterior, the Millennium Falcon has ' +
       'played a role in some of the greatest victories of the Rebel Alliance and the New Republic.',
-      price: '$30,000',
+      price: 30000,
       passengers: '25',
       destinations: ['New York', 'San Francisco', 'Wroclaw', 'Moon', 'Tatooine', 'Hooth', 'Naboo'],
     },
@@ -45,7 +45,7 @@ export default {
       description: 'Enterprise or USS Enterprise is the name of several fictional spacecraft, ' +
       'some of which are the main craft and setting for various television series and films ' +
       'in the Star Trek science fiction franchise.',
-      price: '$120,000',
+      price: 120000,
       passengers: '1,000',
       destinations: ['New York', 'Wroclaw', 'Moon', 'Turkana IV', 'Nimbus III', 'Vulcan'],
     },
@@ -55,12 +55,12 @@ export default {
       description: 'The Planet Express Ship is a fictional anthropomorphic spaceship ' +
       'in the animated series Futurama, which bears the official designation ' +
       'U.S.S. Planet Express Ship.',
-      price: '$500',
+      price: 500,
       passengers: '15',
       destinations: [
         'New York', 'Wroclaw', 'Moon',
         'Mars', 'Tokyo', 'Amazonia', 'Doohan 6',
-        'Eternium', 'Kronos',
+        'Eternium', 'Kronos', 'Jupitar',
       ],
     },
   ],

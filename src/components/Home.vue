@@ -92,6 +92,9 @@
       selectedFromDestination(val) {
         this.destinations = search.updateToDestination(val);
       },
+      selectedToDestination(val) {
+        this.prices = search.updatePriceRange(val, this.selectedFromDestination);
+      },
     },
     methods: {
       updateFromDestination(destination) {
