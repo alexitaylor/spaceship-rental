@@ -15,9 +15,13 @@
   "dependencies": {
     "babel-runtime": "^6.0.0",
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "stf-vue-select": "^0.1.4",
     "vue": "^1.0.21",
     "vue-material": "^0.7.4",
+    "vue-multiselect": "^1.1.5",
     "vue-router": "^2.7.0",
+    "vue-select": "github:sagalbot/vue-select",
     "vuetify": "^0.13.1"
   },
   "devDependencies": {

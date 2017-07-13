@@ -1,38 +1,42 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+
     <div class="row">
       <div class="col s12">
         <div class="card-panel teal">
           <span class="white-text">Search Feature
             <h6>departureDate: {{ departureDate }}</h6>
             <h6>returnDate: {{ returnDate }}</h6>
-            <h6>from: {{ selected  }}</h6>
+            <h6>from: {{ selectedFromDestination }}</h6>
+            <h6>To: {{ selectedToDestination }}</h6>
+            <h6>priceRange: {{ priceRange }}</h6>
+            <h6>destinations: {{ destinations.length }}</h6>
             <div class="row">
               <div class="col s6"><p>Departure Date</p></div>
               <div class="col s6"><p>Return Date</p></div>
-              <div class="col s6"><input v-model="departureDate" type="date" class="datepicker date-input"></div>
-              <div class="col s6"><input v-model="returnDate" type="date" class="datepicker date-input"></div>
+              <div class="col s4"><input v-model="departureDate" type="date" class="datepicker date-input" placeholder="Departure Date"></div>
+              <div class="col s4 offset-s2"><input v-model="returnDate" type="date" class="datepicker date-input" placeholder="Return Date"></div>
             </div>
 
             <div class="row">
               <div class="col s6">
-                <div class="input-field col s12">
-                  <select v-select="select">
-                    <option value="" disabled selected>Choose your option</option>
-                    <option v-for="from in fromDestinations" v-bind:value="from">{{ from }}</option>
-                  </select>
-                  <label class="select-label">From</label>
-                </div>
+                <multiselect
+                  :selected="selected",
+                  :options="destinations",
+                  @update="updateFromDestination",
+                  placeholder="Select From",
+                >
+                </multiselect>
               </div>
               <div class="col s6">
-                <div class="input-field col s12">
-                  <select>
-                    <option value="" disabled selected>Choose your option</option>
-                    <option v-for="to in toDestinations">{{ to }}</option>
-                  </select>
-                  <label class="select-label">To</label>
-                </div>
+                <multiselect
+                  :selected="selected",
+                  :options="destinations",
+                  @update="updateToDestination",
+                  placeholder="Select To",
+                >
+                </multiselect>
               </div>
             </div>
 
@@ -44,15 +48,34 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect';
+import search from '../services/search';
+
 export default {
+  components: { Multiselect },
   data() {
     return {
       msg: 'Hello World!',
       departureDate: '',
       returnDate: '',
-      fromDestinations: ['San Francisco', 'New York', 'Wroclaw'],
-      toDestinations: ['Moon', 'Mars', 'Pluto'],
+      destinations: [
+        'San Francisco', 'New York', 'Wroclaw', 'Moon',
+        'Mars', 'Pluto', 'Tatooine', 'Hooth', 'Naboo',
+        'Turkana IV', 'Nimbus III', 'Vulcan', 'Amazonia',
+        'Doohan 6', 'Eternium', 'Kronos', 'Tokyo',
+      ],
+      selectedFromDestination: '',
+      selectedToDestination: '',
+      priceRange: '',
     };
+  },
+  methods: {
+    updateFromDestination(destination) {
+      this.selectedFromDestination = destination;
+    },
+    updateToDestination(destination) {
+      this.selectedToDestination = destination;
+    },
   },
 };
 </script>
@@ -68,10 +91,12 @@ p {
 }
 
 .date-input {
-  background-color: #26a69a !important;
+  background-color: white !important;
   border: none !important;
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
   padding-left: 5% !important;
+  width: 50vw;
+  color: black;
 }
 
 .date-input:hover {
@@ -82,4 +107,5 @@ p {
   color: white;
   font-size: 1em;
 }
+
 </style>

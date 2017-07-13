@@ -1,0 +1,13 @@
+.multiselect__tags {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  border: none !important;
+  padding: 8px 20px 0 8px !important;
+}
+
+.multiselect__tags:hover {
+  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+
+.multiselect__tags input {
+  margin-bottom: 1em !important;
+}

@@ -32,6 +32,7 @@ body {
 #app {
   color: #2c3e50;
   text-align: center;
+  width: 90vw;
 }
 
 .logo {
