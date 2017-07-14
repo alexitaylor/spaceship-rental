@@ -14,7 +14,7 @@ export default {
       passengers: '1500',
       sizeFilter: 3,
       destinations: ['Mars', 'San Francisco', 'Moon', 'New York'],
-      flightDays: ['Monday', 'Tuesday', 'Wendsday', 'Thursday'],
+      flightDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
       img: 'https://img1.cgtrader.com/items/721237/f6005218d3/large/dragon-spacex-3d-model-vray-3ds-max-3d-model-max-obj-fbx-mtl.png',
     },
     {
@@ -42,7 +42,7 @@ export default {
       passengers: '25',
       sizeFilter: 1,
       destinations: ['New York', 'San Francisco', 'Wroclaw', 'Moon', 'Tatooine', 'Hooth', 'Naboo'],
-      flightDays: ['Monday', 'Tuesday', 'Wendsday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      flightDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       img: 'http://cherrysheriff.com/wp-content/uploads/2015/09/Falcon_poster_20cm_version.jpg',
     },
     {
@@ -90,7 +90,7 @@ export default {
       passengers: '60',
       sizeFilter: 2,
       destinations: ['Mars', 'San Francisco', 'Moon', 'Ariel', 'Beaumonde', 'Haven'],
-      flightDays: ['Tuesday', 'Wendsday', 'Thursday'],
+      flightDays: ['Tuesday', 'Wednesday', 'Thursday'],
       img: 'http://i.imgur.com/TDE6Daq.jpg',
     },
   ],

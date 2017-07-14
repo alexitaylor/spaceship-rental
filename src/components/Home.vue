@@ -5,13 +5,18 @@
       <div class="col s12">
         <div class="card-panel teal">
           <span class="white-text">
+
+            <h4>{{ selectedPriceRange }}</h4>
+
+            <!-- Departure and Return DATE -->
             <div class="row">
-              <div class="col s6"><p>Departure Date</p></div>
-              <div class="col s6"><p>Return Date</p></div>
+              <div class="col s4"><p>Departure Date</p></div>
+              <div class="col s4"><p>Return Date</p></div>
               <div class="col s4"><input v-model="departureDate" type="date" class="datepicker date-input" placeholder="Departure Date"></div>
               <div class="col s4 offset-s2"><input v-model="returnDate" type="date" class="datepicker date-input" placeholder="Return Date"></div>
             </div>
 
+            <!-- From and To DESTINATIONS -->
             <div class="row">
               <div class="col s6">
                 <multiselect
@@ -33,6 +38,7 @@
               </div>
             </div>
 
+            <!-- PRICE range and SIZE range -->
             <div class="row">
               <div class="col s6">
                 <multiselect
@@ -72,17 +78,19 @@
 <script>
   import Multiselect from 'vue-multiselect';
   import search from '../services/search';
+  import spaceships from '../data/spaceships';
 
   export default {
     components: { Multiselect },
     data() {
       return {
         msg: 'Hello World!',
+        spaceships: [],
         departureDate: '',
         returnDate: '',
         selectedFromDestination: '',
         selectedToDestination: '',
-        priceRange: '',
+        selectedPriceRange: '',
         fromDestinations: [],
         toDestinations: [],
         prices: [],
@@ -108,12 +116,23 @@
       };
     },
     created() {
+      this.spaceships = spaceships.spaceships;
       this.fromDestinations = this.allDestinations;
       this.toDestinations = this.allDestinations;
       this.prices = this.allPrices;
       this.sizes = this.allSizes;
     },
     watch: {
+      spaceships() {
+        // update all input fields
+      },
+      selectedPriceRange(price) {
+        if (price === null) {
+          this.spaceships = spaceships.spaceships;
+        } else {
+          // SOMETHING
+        }
+      },
       selectedFromDestination(val) {
         if (val === null) {
           this.destinations = this.allDestinations;
@@ -125,11 +144,6 @@
           this.toDestinations = search.updateDestination(val);
           this.prices = search.updatePriceRange(val, this.selectedToDestination);
         }
-        this.isDisableSearch = this.departureDate
-          && this.returnDate
-          && this.selectedFromDestination
-          && this.selectedToDestination
-          && this.priceRange;
       },
       selectedToDestination(val) {
         if (val === null) {
@@ -149,7 +163,7 @@
       },
       updatePrice(price) {
         console.log(price.priceFilter);
-        this.priceRange = price;
+        this.selectedPriceRange = price.priceFilter;
       },
       updateSize(size) {
         console.log(size.sizeFilter);

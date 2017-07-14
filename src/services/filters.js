@@ -1,7 +1,29 @@
 import spaceships from '../data/spaceships';
 import _ from 'lodash';
+import moment from 'moment';
 
 const filters = {
+  filterDate: (dateOne, dateTwo) => {
+    const dayOfWeek = {
+      0: 'Sunday', 1: 'Monday',
+      2: 'Tuesday', 3: 'Wednesday',
+      4: 'Thursday', 5: 'Friday',
+      6: 'Saturday',
+    };
+    const dayOne = dayOfWeek[moment(dateOne).day()];
+    const dayTwo = dayOfWeek[moment(dateTwo).day()];
+    console.log(dayOne);
+    console.log(dayTwo);
+
+    return _.filter(spaceships.spaceships, (spaceship) => {
+      if (!dayOne && dayTwo) {
+        return spaceship.flightDays.includes(dayTwo);
+      } else if (dayOne && !dayTwo) {
+        return spaceship.flightDays.includes(dayOne);
+      }
+      return spaceship.flightDays.includes(dayOne) && spaceship.flightDays.includes(dayTwo);
+    });
+  },
   filterPrice: (price, destination, size) => {
     const filtered = _.filter(spaceships.spaceships, (spaceship) => {
       if (destination && size) {

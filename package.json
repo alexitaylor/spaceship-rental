@@ -16,6 +16,7 @@
     "babel-runtime": "^6.0.0",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "stf-vue-select": "^0.1.4",
     "vue": "^1.0.21",
     "vue-material": "^0.7.4",
