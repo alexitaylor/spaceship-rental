@@ -60,6 +60,7 @@
         isThree: false,
         isFour: false,
         selectedDestination: '',
+        currentPriceFilter: '',
         destinations: [
           'San Francisco', 'New York', 'Wroclaw', 'Moon',
           'Mars', 'Pluto', 'Tatooine', 'Hooth', 'Naboo',
@@ -77,15 +78,19 @@
         this.isTwo = idx === 2;
         this.isThree = idx === 3;
         this.isFour = idx === 4;
-        this.spaceships = search.priceFilter(idx);
+        this.currentPriceFilter = idx;
+        this.spaceships = search.priceFilter(idx, this.selectedDestination);
       },
       clearFilters() {
+        this.isOne = false;
+        this.isTwo = false;
+        this.isThree = false;
+        this.isFour = false;
         this.spaceships = spaceships.spaceships;
       },
       updateDestination(destination) {
-        // do something
         this.selectedDestination = destination;
-        this.spaceships = search.destinationFilter(destination);
+        this.spaceships = search.destinationFilter(destination, this.currentPriceFilter);
       },
     },
   };

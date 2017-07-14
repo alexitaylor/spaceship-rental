@@ -43,10 +43,16 @@ export default {
     });
     return priceRange;
   },
-  priceFilter: (priceFilter) => _.filter(spaceships.spaceships, (spaceship) =>
-    spaceship.priceFilter === priceFilter
-  ),
-  destinationFilter: (destination) => _.filter(spaceships.spaceships, (spaceship) =>
-      spaceship.destinations.includes(destination)
-  ),
+  priceFilter: (priceFilter, destination) => _.filter(spaceships.spaceships, (spaceship) => {
+    console.log('something');
+    return destination ?
+      spaceship.priceFilter === priceFilter && spaceship.destinations.includes(destination)
+      : spaceship.priceFilter === priceFilter;
+  }),
+  destinationFilter: (destination, priceFilter) => _.filter(spaceships.spaceships, (spaceship) => {
+    console.log('something');
+    return priceFilter ?
+      spaceship.destinations.includes(destination) && spaceship.priceFilter === priceFilter
+      : spaceship.destinations.includes(destination);
+  }),
 };
