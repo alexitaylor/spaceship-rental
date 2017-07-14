@@ -43,4 +43,10 @@ export default {
     });
     return priceRange;
   },
+  priceFilter: (priceFilter) => _.filter(spaceships.spaceships, (spaceship) =>
+    spaceship.priceFilter === priceFilter
+  ),
+  destinationFilter: (destination) => _.filter(spaceships.spaceships, (spaceship) =>
+      spaceship.destinations.includes(destination)
+  ),
 };
