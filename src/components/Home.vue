@@ -10,8 +10,8 @@
 
             <!-- Departure and Return DATE -->
             <div class="row">
-              <div class="col s4"><p>Departure Date</p></div>
-              <div class="col s4"><p>Return Date</p></div>
+              <div class="col s6"><p>Departure Date</p></div>
+              <div class="col s6"><p>Return Date</p></div>
               <div class="col s4"><input v-model="departureDate" type="date" class="datepicker date-input" placeholder="Departure Date"></div>
               <div class="col s4 offset-s2"><input v-model="returnDate" type="date" class="datepicker date-input" placeholder="Return Date"></div>
             </div>
@@ -129,8 +129,6 @@
       selectedPriceRange(price) {
         if (price === null) {
           this.spaceships = spaceships.spaceships;
-        } else {
-          // SOMETHING
         }
       },
       selectedFromDestination(val) {
