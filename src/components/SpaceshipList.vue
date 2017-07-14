@@ -35,7 +35,7 @@
           :selected="selected",
           :options="destinations",
           @update="updateDestination",
-          placeholder="Select To",
+          placeholder="Select Destination",
         >
         </multiselect>
       </div>
@@ -102,10 +102,35 @@
     },
     watch: {
       departureDate(date) {
-        this.spaceships = filters.filterDate(date, this.returnDate);
+        this.spaceships = filters.filterAll(
+          date,
+          this.returnDate,
+          this.currentPriceFilter,
+          this.currentSizeFilter,
+          this.selectedDestination,
+          this.spaceships
+        );
       },
       returnDate(date) {
-        this.spaceships = filters.filterDate(date, this.toDate);
+        this.spaceships = filters.filterAll(
+          date,
+          this.departureDate,
+          this.currentPriceFilter,
+          this.currentSizeFilter,
+          this.selectedDestination,
+          this.spaceships
+        );
+      },
+      currentPriceFilter(price) {
+        console.log('priiiice', price);
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
+          price,
+          this.currentSizeFilter,
+          this.selectedDestination,
+          this.spaceships
+        );
       },
     },
     methods: {
@@ -115,28 +140,31 @@
         this.isThree = idx === 3;
         this.isFour = idx === 4;
         this.currentPriceFilter = idx;
-        this.spaceships = filters.filterPrice(
-          idx,
-          this.selectedDestination,
-          this.currentSizeFilter);
       },
       updateSizeFilter(idx) {
         this.isFa1 = idx === 1;
         this.isFa2 = idx === 2;
         this.isFa3 = idx === 3;
         this.currentSizeFilter = idx;
-        this.spaceships = filters.filterSize(
-          idx,
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
           this.currentPriceFilter,
+          idx,
           this.selectedDestination,
-          );
+          this.spaceships
+        );
       },
       updateDestination(destination) {
         this.selectedDestination = destination;
-        this.spaceships = filters.filterDestination(
-          destination,
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
           this.currentPriceFilter,
-          this.currentSizeFilter);
+          this.currentSizeFilter,
+          this.selectedDestination,
+          this.spaceships
+        );
       },
       clearFilters() {
         this.isOne = false;
