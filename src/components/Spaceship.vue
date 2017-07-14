@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <h1>Spaceship {{ $route.params.shipID }}</h1>
     <!--<h1 v-for="ship in spaceships">{{ ship.model }}</h1>-->
 
 
