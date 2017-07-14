@@ -23,7 +23,7 @@
 </template>
 
 <script>
-  import search from '../services/search';
+  import filter from '../services/filters';
 
   export default {
     data() {
@@ -33,7 +33,7 @@
       };
     },
     created() {
-      this.currentShip = search.getCurrentShip(this.$route.params.shipID)[0];
+      this.currentShip = filter.getCurrentShip(this.$route.params.shipID)[0];
     },
   };
 </script>

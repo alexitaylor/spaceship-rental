@@ -26,6 +26,10 @@ const search = {
         3: '$100,001 - $500,000',
         4: '$500,001 - $1,000,000',
       };
+
+    // filters.filterDestination(destinationOne, price, size);
+    // filters.filterDestination(destinationTwo, price, size);
+
     _.forEach(spaceships.spaceships, (spaceship) => {
       const isToDestination = spaceship.destinations.includes(destinationOne);
       const isFromDestination = spaceship.destinations.includes(destinationTwo);
