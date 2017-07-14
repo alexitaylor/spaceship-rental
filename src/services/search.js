@@ -55,4 +55,7 @@ export default {
       spaceship.destinations.includes(destination) && spaceship.priceFilter === priceFilter
       : spaceship.destinations.includes(destination);
   }),
+  getCurrentShip: (shipID) => _.filter(spaceships.spaceships, (spaceship) =>
+    spaceship.model === shipID
+  ),
 };
