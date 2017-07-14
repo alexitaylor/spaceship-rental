@@ -3,7 +3,7 @@ import _ from 'lodash';
 import moment from 'moment';
 
 const filters = {
-  filterAll: (departureDate, returnDate, price, size, destination) => {
+  filterAll: (departureDate, returnDate, price, size, destination, destinationTwo) => {
     let ships = spaceships.spaceships;
     if (departureDate) {
       ships = filters.filterDate(departureDate, ships);
@@ -20,6 +20,9 @@ const filters = {
     if (destination) {
       ships = filters.filterDestination(destination, ships);
     }
+    if (destinationTwo) {
+      ships = filters.filterDestination(destinationTwo, ships);
+    }
     return ships;
   },
   filterDate: (date, filteredShips) => {
@@ -33,59 +36,15 @@ const filters = {
     const ships = filteredShips || spaceships.spaceships;
     return _.filter(ships, (spaceship) => spaceship.flightDays.includes(day));
   },
-  // filterPrice: (price, destination, size) => {
-  //   const filtered = _.filter(spaceships.spaceships, (spaceship) => {
-  //     if (destination && size) {
-  //       return spaceship.priceFilter === price
-  //         && spaceship.sizeFilter === size
-  //         && spaceship.destinations.includes(destination);
-  //     } else if (destination && !size) {
-  //       return spaceship.priceFilter === price && spaceship.destinations.includes(destination);
-  //     } else if (!destination && size) {
-  //       return spaceship.priceFilter === price && spaceship.sizeFilter === size;
-  //     }
-  //     return spaceship.priceFilter === price;
-  //   });
-  //   return filtered;
-  // },
   filterPrice: (price, filteredShips) => {
     const ships = filteredShips || spaceships.spaceships;
     return _.filter(ships, (spaceship) => spaceship.priceFilter === price);
   },
-  // filterDestination: (destination, price, size) => {
-  //   const filtered = _.filter(spaceships.spaceships, (spaceship) => {
-  //     if (price && size) {
-  //       return spaceship.priceFilter === price
-  //         && spaceship.sizeFilter === size
-  //         && spaceship.destinations.includes(destination);
-  //     } else if (price && !size) {
-  //       return spaceship.priceFilter === price && spaceship.destinations.includes(destination);
-  //     } else if (!price && size) {
-  //       return spaceship.destinations.includes(destination) && spaceship.sizeFilter === size;
-  //     }
-  //     return spaceship.destinations.includes(destination);
-  //   });
-  //   return filtered;
-  // },
   filterDestination: (destination, filteredShips) => {
+    // TODO: deal with two inclusive destinations from search
     const ships = filteredShips || spaceships.spaceships;
     return _.filter(ships, (spaceship) => spaceship.destinations.includes(destination));
   },
-  // filterSize: (size, price, destination) => {
-  //   const filtered = _.filter(spaceships.spaceships, (spaceship) => {
-  //     if (price && destination) {
-  //       return spaceship.priceFilter === price
-  //         && spaceship.sizeFilter === size
-  //         && spaceship.destinations.includes(destination);
-  //     } else if (price && !destination) {
-  //       return spaceship.priceFilter === price && spaceship.sizeFilter === size;
-  //     } else if (!price && destination) {
-  //       return spaceship.destinations.includes(destination) && spaceship.sizeFilter === size;
-  //     }
-  //     return spaceship.sizeFilter === size;
-  //   });
-  //   return filtered;
-  // },
   filterSize: (size, filteredShips) => {
     const ships = filteredShips || spaceships.spaceships;
     return _.filter(ships, (spaceship) => spaceship.sizeFilter === size);

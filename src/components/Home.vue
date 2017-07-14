@@ -77,8 +77,8 @@
 
 <script>
   import Multiselect from 'vue-multiselect';
-  import search from '../services/search';
   import spaceships from '../data/spaceships';
+  import filters from '../services/filters';
 
   export default {
     components: { Multiselect },
@@ -91,6 +91,7 @@
         selectedFromDestination: '',
         selectedToDestination: '',
         selectedPriceRange: '',
+        selectedSize: '',
         fromDestinations: [],
         toDestinations: [],
         prices: [],
@@ -123,33 +124,66 @@
       this.sizes = this.allSizes;
     },
     watch: {
-      spaceships() {
-        // update all input fields
+      departureDate(date) {
+        this.spaceships = filters.filterAll(
+          date,
+          this.returnDate,
+          this.currentPriceFilter,
+          this.currentSizeFilter,
+          this.selectedDestination,
+          this.selectedToDestination
+        );
+      },
+      returnDate(date) {
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          date,
+          this.currentPriceFilter,
+          this.currentSizeFilter,
+          this.selectedDestination,
+          this.selectedToDestination
+        );
+      },
+      selectedFromDestination(destination) {
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
+          this.currentPriceFilter,
+          this.currentSizeFilter,
+          destination,
+          this.selectedToDestination
+        );
+      },
+      selectedToDestination(destination) {
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
+          this.currentPriceFilter,
+          this.currentSizeFilter,
+          this.selectedFromDestination,
+          destination
+        );
       },
       selectedPriceRange(price) {
-        if (price === null) {
-          this.spaceships = spaceships.spaceships;
-        }
+        console.log('priiiice', price);
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
+          price,
+          this.currentSizeFilter,
+          this.selectedDestination,
+          this.selectedToDestination
+        );
       },
-      selectedFromDestination(val) {
-        if (val === null) {
-          this.destinations = this.allDestinations;
-        } else {
-          // filter dates
-          // filter to destination
-          // filter price range
-          // filter ship size
-          this.toDestinations = search.updateDestination(val);
-          this.prices = search.updatePriceRange(val, this.selectedToDestination);
-        }
-      },
-      selectedToDestination(val) {
-        if (val === null) {
-          this.destinations = this.allDestinations;
-        } else {
-          this.fromDestinations = search.updateDestination(val);
-          this.prices = search.updatePriceRange(val, this.selectedFromDestination);
-        }
+      selectedSize(size) {
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
+          this.currentPriceFilter,
+          size,
+          this.selectedDestination,
+          this.selectedToDestination
+        );
       },
     },
     methods: {
@@ -164,8 +198,7 @@
         this.selectedPriceRange = price.priceFilter;
       },
       updateSize(size) {
-        console.log(size.sizeFilter);
-        this.selectedSize = size;
+        this.selectedSize = size.sizeFilter;
       },
     },
   };

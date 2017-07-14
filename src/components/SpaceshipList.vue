@@ -107,18 +107,16 @@
           this.returnDate,
           this.currentPriceFilter,
           this.currentSizeFilter,
-          this.selectedDestination,
-          this.spaceships
+          this.selectedDestination
         );
       },
       returnDate(date) {
         this.spaceships = filters.filterAll(
-          date,
           this.departureDate,
+          date,
           this.currentPriceFilter,
           this.currentSizeFilter,
-          this.selectedDestination,
-          this.spaceships
+          this.selectedDestination
         );
       },
       currentPriceFilter(price) {
@@ -128,8 +126,25 @@
           this.returnDate,
           price,
           this.currentSizeFilter,
-          this.selectedDestination,
-          this.spaceships
+          this.selectedDestination
+        );
+      },
+      currentSizeFilter(size) {
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
+          this.currentPriceFilter,
+          size,
+          this.selectedDestination
+        );
+      },
+      selectedDestination(destination) {
+        this.spaceships = filters.filterAll(
+          this.departureDate,
+          this.returnDate,
+          this.currentPriceFilter,
+          this.currentSizeFilter,
+          destination
         );
       },
     },
@@ -146,25 +161,9 @@
         this.isFa2 = idx === 2;
         this.isFa3 = idx === 3;
         this.currentSizeFilter = idx;
-        this.spaceships = filters.filterAll(
-          this.departureDate,
-          this.returnDate,
-          this.currentPriceFilter,
-          idx,
-          this.selectedDestination,
-          this.spaceships
-        );
       },
       updateDestination(destination) {
         this.selectedDestination = destination;
-        this.spaceships = filters.filterAll(
-          this.departureDate,
-          this.returnDate,
-          this.currentPriceFilter,
-          this.currentSizeFilter,
-          this.selectedDestination,
-          this.spaceships
-        );
       },
       clearFilters() {
         this.isOne = false;
