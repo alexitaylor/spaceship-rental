@@ -2,20 +2,23 @@ import spaceships from '../data/spaceships';
 import _ from 'lodash';
 
 const search = {
-  updateDestination: (destination) => {
-    const updatedDestination = [];
-    _.forEach(spaceships.spaceships, (spaceship) => {
-      if (spaceship.destinations.includes(destination)) {
-        _.forEach(spaceship.destinations, (place) => {
-          if (!updatedDestination.includes(place) && place !== destination) {
-            updatedDestination.push(place);
-          }
-        });
-      }
-    });
-    updatedDestination.unshift(destination);
-    return updatedDestination;
-  },
+  // updateDestination: (destination) => {
+  //   const updatedDestination = [];
+  //   _.forEach(spaceships.spaceships, (spaceship) => {
+  //     if (spaceship.destinations.includes(destination)) {
+  //       _.forEach(spaceship.destinations, (place) => {
+  //         if (!updatedDestination.includes(place) && place !== destination) {
+  //           updatedDestination.push(place);
+  //         }
+  //       });
+  //     }
+  //   });
+  //   updatedDestination.unshift(destination);
+  //   return updatedDestination;
+  // },
+  // updateDestination: (destinationOne, destinationTwo, depatureDate, returnDate, price, size) => {
+  //
+  // },
   updatePriceRange: (destinationOne, destinationTwo) => {
     const priceRange = [];
 
@@ -46,6 +49,9 @@ const search = {
       }
     });
     return priceRange;
+  },
+  updateSizeRange: (size) => {
+    console.log(size);
   },
 };
 

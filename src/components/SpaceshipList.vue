@@ -5,9 +5,18 @@
     <h2 class="header">Filters</h2>
     <a class="waves-effect waves-light btn" v-on:click="clearFilters">Clear Filters</a>
 
+    <!-- Departure and Return DATE -->
+    <div class="row">
+      <div class="col s3 offset-s3"><p>Departure Date</p></div>
+      <div class="col s3"><p>Return Date</p></div>
+      <div class="col s3 offset-s3"><input v-model="departureDate" type="date" class="datepicker date-input" placeholder="Departure Date"></div>
+      <div class="col s3"><input v-model="returnDate" type="date" class="datepicker date-input" placeholder="Return Date"></div>
+    </div>
+
     <div class="row">
       <div class="col s3 offset-s3">
         <ul class="pagination">
+          <!-- PRICE range -->
           <li class="waves-effect price" v-bind:class="{ 'active': isOne }" v-on:click="updatePriceFilter(1)"><a>$</a></li>
           <li class="waves-effect price" v-bind:class="{ 'active': isTwo }" v-on:click="updatePriceFilter(2)"><a>$$</a></li>
           <li class="waves-effect price" v-bind:class="{ 'active': isThree }" v-on:click="updatePriceFilter(3)"><a>$$$</a></li>
@@ -15,11 +24,13 @@
         </ul>
       </div>
       <div class="col s3">
+        <!-- Spaceship SIZE range -->
         <i class="fa fa-rocket fa-2x" v-bind:class="{ 'fa-active': isFa1 }" v-on:click="updateSizeFilter(1)" aria-hidden="true"></i>
         <i class="fa fa-rocket fa-3x" v-bind:class="{ 'fa-active': isFa2 }" v-on:click="updateSizeFilter(2)" aria-hidden="true"></i>
         <i class="fa fa-rocket fa-4x" v-bind:class="{ 'fa-active': isFa3 }" v-on:click="updateSizeFilter(3)" aria-hidden="true"></i>
       </div>
       <div class="col s6 offset-s3">
+        <!-- Spaceship's destinations -->
         <multiselect
           :selected="selected",
           :options="destinations",
@@ -52,8 +63,6 @@
         </div>
       </div>
 
-
-
   </div>
 </template>
 
@@ -68,6 +77,8 @@
       return {
         msg: 'Hello Space Ship List!',
         spaceships: [],
+        departureDate: '',
+        returnDate: '',
         isOne: false,
         isTwo: false,
         isThree: false,
@@ -88,6 +99,14 @@
     },
     created() {
       this.spaceships = spaceships.spaceships;
+    },
+    watch: {
+      departureDate(date) {
+        this.spaceships = filters.filterDate(date, this.returnDate);
+      },
+      returnDate(date) {
+        this.spaceships = filters.filterDate(date, this.toDate);
+      },
     },
     methods: {
       updatePriceFilter(idx) {
