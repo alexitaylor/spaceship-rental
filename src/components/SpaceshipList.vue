@@ -4,20 +4,31 @@
 
     <h2 class="header">Filters</h2>
     <a class="waves-effect waves-light btn" v-on:click="clearFilters">Clear Filters</a>
-    <ul class="pagination">
-      <li class="waves-effect" v-bind:class="{ 'active': isOne }" v-on:click="priceFilter(1)"><a>$</a></li>
-      <li class="waves-effect" v-bind:class="{ 'active': isTwo }" v-on:click="priceFilter(2)"><a>$$</a></li>
-      <li class="waves-effect" v-bind:class="{ 'active': isThree }" v-on:click="priceFilter(3)"><a>$$$</a></li>
-      <li class="waves-effect" v-bind:class="{ 'active': isFour }" v-on:click="priceFilter(4)"><a>$$$$</a></li>
-    </ul>
 
-    <multiselect
-      :selected="selected",
-      :options="destinations",
-      @update="updateDestination",
-      placeholder="Select To",
-    >
-    </multiselect>
+    <div class="row">
+      <div class="col s3 offset-s3">
+        <ul class="pagination">
+          <li class="waves-effect price" v-bind:class="{ 'active': isOne }" v-on:click="updatePriceFilter(1)"><a>$</a></li>
+          <li class="waves-effect price" v-bind:class="{ 'active': isTwo }" v-on:click="updatePriceFilter(2)"><a>$$</a></li>
+          <li class="waves-effect price" v-bind:class="{ 'active': isThree }" v-on:click="updatePriceFilter(3)"><a>$$$</a></li>
+          <li class="waves-effect price" v-bind:class="{ 'active': isFour }" v-on:click="updatePriceFilter(4)"><a>$$$$</a></li>
+        </ul>
+      </div>
+      <div class="col s3">
+        <i class="fa fa-rocket fa-2x" v-bind:class="{ 'fa-active': isFa1 }" v-on:click="updateSizeFilter(1)" aria-hidden="true"></i>
+        <i class="fa fa-rocket fa-3x" v-bind:class="{ 'fa-active': isFa2 }" v-on:click="updateSizeFilter(2)" aria-hidden="true"></i>
+        <i class="fa fa-rocket fa-4x" v-bind:class="{ 'fa-active': isFa3 }" v-on:click="updateSizeFilter(3)" aria-hidden="true"></i>
+      </div>
+      <div class="col s6 offset-s3">
+        <multiselect
+          :selected="selected",
+          :options="destinations",
+          @update="updateDestination",
+          placeholder="Select To",
+        >
+        </multiselect>
+      </div>
+    </div>
 
       <div class="row">
         <div class="col s6" v-for="(index, ship) in spaceships">
@@ -30,9 +41,11 @@
                 <h6 class="header"><strong>{{ ship.make }}</strong></h6>
                 <h6 class="header">{{ ship.model }}</h6>
                 <h6>{{ ship.priceUSD }} / ticket</h6>
+                <h6>{{ ship.passengers }}</h6>
               </div>
               <div class="card-action">
-                <a v-link="{ name: 'Spaceship', params: { shipID: ship.model } }">This is a link</a>
+                <a v-link="{ name: 'Spaceship', params: { shipID: ship.model } }">Learn More</a>
+                <!--<a v-link="{ name: 'Spaceship', params: { shipID: ship.model } }">Book Flight</a>-->
               </div>
             </div>
           </div>
@@ -47,7 +60,7 @@
 <script>
   import Multiselect from 'vue-multiselect';
   import spaceships from '../data/spaceships';
-  import search from '../services/search';
+  import filters from '../services/filters';
 
   export default {
     components: { Multiselect },
@@ -59,8 +72,12 @@
         isTwo: false,
         isThree: false,
         isFour: false,
+        isFa1: false,
+        isFa2: false,
+        isFa3: false,
         selectedDestination: '',
         currentPriceFilter: '',
+        currentSizeFilter: '',
         destinations: [
           'San Francisco', 'New York', 'Wroclaw', 'Moon',
           'Mars', 'Pluto', 'Tatooine', 'Hooth', 'Naboo',
@@ -73,24 +90,47 @@
       this.spaceships = spaceships.spaceships;
     },
     methods: {
-      priceFilter(idx) {
+      updatePriceFilter(idx) {
         this.isOne = idx === 1;
         this.isTwo = idx === 2;
         this.isThree = idx === 3;
         this.isFour = idx === 4;
         this.currentPriceFilter = idx;
-        this.spaceships = search.priceFilter(idx, this.selectedDestination);
+        this.spaceships = filters.filterPrice(
+          idx,
+          this.selectedDestination,
+          this.currentSizeFilter);
+      },
+      updateSizeFilter(idx) {
+        this.isFa1 = idx === 1;
+        this.isFa2 = idx === 2;
+        this.isFa3 = idx === 3;
+        this.currentSizeFilter = idx;
+        this.spaceships = filters.filterSize(
+          idx,
+          this.currentPriceFilter,
+          this.selectedDestination,
+          );
+      },
+      updateDestination(destination) {
+        this.selectedDestination = destination;
+        this.spaceships = filters.filterDestination(
+          destination,
+          this.currentPriceFilter,
+          this.currentSizeFilter);
       },
       clearFilters() {
         this.isOne = false;
         this.isTwo = false;
         this.isThree = false;
         this.isFour = false;
+        this.isFa1 = false;
+        this.isFa2 = false;
+        this.isFa3 = false;
+        this.currentPriceFilter = '';
+        this.currentSizeFilter = '';
+        this.selectedDestination = '';
         this.spaceships = spaceships.spaceships;
-      },
-      updateDestination(destination) {
-        this.selectedDestination = destination;
-        this.spaceships = search.destinationFilter(destination, this.currentPriceFilter);
       },
     },
   };
@@ -108,5 +148,17 @@
 
   .pagination li.active {
     background-color: #42b983 !important;
+  }
+
+  .price:hover {
+    background-color: #78cfa8;
+  }
+
+  .fa-active {
+    color: #42b983;
+  }
+
+  .fa:hover {
+    color: #78cfa8;
   }
 </style>

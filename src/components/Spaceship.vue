@@ -1,12 +1,10 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Spaceship {{ $route.params.shipID }}</h2>
     <div class="row">
-      <div class="col s12"><h4><strong>{{ currentShip.make }}</strong> {{ currentShip.model }}</h4></div>
+      <div class="col s12"><h1><strong>{{ currentShip.make }}</strong> {{ currentShip.model }}</h1></div>
       <div class="col s6">
         <p>{{ currentShip.description }}</p>
-        <h5>Price: {{ currentShip.priceUSD }}</h5>
+        <h5>Price: {{ currentShip.priceUSD }} / ticket</h5>
         <h5>Passengers: {{ currentShip.passengers }}</h5>
         <ul>
           <li><strong>Destinations:</strong></li>
@@ -14,8 +12,12 @@
         </ul>
       </div>
       <div class="col s6">
-        <img :src="currentShip.img" />
+        <img :src="currentShip.img" width="200" height="300" />
       </div>
+    </div>
+    <div class="row">
+      <div class="col s3 offset-s3"><a v-link="{ path: '/list' }" class="waves-effect waves-light btn">Back</a></div>
+      <div class="col s3"><a class="waves-effect waves-light btn disabled">Book Spaceship</a></div>
     </div>
   </div>
 </template>
