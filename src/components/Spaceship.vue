@@ -4,30 +4,6 @@
     <!--<h1 v-for="ship in spaceships">{{ ship.model }}</h1>-->
 
 
-      <h2 class="header">Horizontal Card</h2>
-      <div class="row">
-        <div class="col s6" v-for="ship in spaceships">
-          <div class="card horizontal">
-            <div class="card-image">
-              <img :src="ship.img" width="100" height="190">
-            </div>
-            <div class="card-stacked">
-              <div class="card-content">
-                <h6 class="header"><strong>{{ ship.make }}</strong> {{ ship.model }}</h6>
-                <p></p>
-                <p></p>
-                <p>{{ ship.price }}</p>
-              </div>
-              <div class="card-action">
-                <a href="#">This is a link</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
   </div>
 </template>
 
@@ -37,7 +13,7 @@
   export default {
     data() {
       return {
-        msg: 'Hello Space Ship List!',
+        msg: 'Hello Space Ship!',
         spaceships: [],
       };
     },

@@ -2,7 +2,8 @@ import Vue from 'vue';
 import App from './App';
 import VueRouter from 'vue-router';
 import Home from './components/Home.vue';
-import SpaceshipList from './components/spaceshipList.vue';
+import SpaceshipList from './components/SpaceshipList.vue';
+import Spaceship from './components/Spaceship.vue';
 
 Vue.use(VueRouter);
 
@@ -18,10 +19,16 @@ const router = new VueRouter();
 // We'll talk about nested routes later.
 router.map({
   '/': {
+    name: 'Home',
     component: Home,
   },
   '/list': {
+    name: 'SpaceshipList',
     component: SpaceshipList,
+  },
+  '/ship/:shipID': {
+    name: 'Spaceship',
+    component: Spaceship,
   },
 });
 

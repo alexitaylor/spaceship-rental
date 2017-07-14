@@ -5,21 +5,13 @@ export default {
   spaceships: [
     {
       make: 'Space X',
-      model: 'Dragon',
-      description: 'Dragon is a reusable spacecraft developed by SpaceX, ' +
-      'an American private space transportation company based in Hawthorne, California.',
-      price: 800000,
-      passengers: '250',
-      destinations: ['Mars', 'San Francisco', 'Moon'],
-    },
-    {
-      make: 'Space X',
       model: 'Dragon V2',
       description: 'Dragon 2 is the second version of the SpaceX Dragon spacecraft, ' +
       'which will be a human-rated vehicle able to make a terrestrial soft landing.',
       price: 600000,
       passengers: '1500',
       destinations: ['Mars', 'San Francisco', 'Moon', 'New York'],
+      img: 'https://img1.cgtrader.com/items/721237/f6005218d3/large/dragon-spacex-3d-model-vray-3ds-max-3d-model-max-obj-fbx-mtl.png',
     },
     {
       make: 'Space X',
@@ -29,6 +21,7 @@ export default {
       price: 1000000,
       passengers: '500',
       destinations: ['Mars', 'San Francisco', 'Moon', 'New York', 'Pluto'],
+      img: 'http://www.spacex.com/sites/all/themes/spacex2012/images/falconheavy/falcon-heavy-render.png',
     },
     {
       make: 'Millennium',
@@ -38,6 +31,7 @@ export default {
       price: 30000,
       passengers: '25',
       destinations: ['New York', 'San Francisco', 'Wroclaw', 'Moon', 'Tatooine', 'Hooth', 'Naboo'],
+      img: 'http://cherrysheriff.com/wp-content/uploads/2015/09/Falcon_poster_20cm_version.jpg',
     },
     {
       make: 'Starship',
@@ -48,6 +42,7 @@ export default {
       price: 120000,
       passengers: '1,000',
       destinations: ['New York', 'Wroclaw', 'Moon', 'Turkana IV', 'Nimbus III', 'Vulcan'],
+      img: 'http://i.imgur.com/EHMUkhR.jpg',
     },
     {
       make: 'Planet Express',
@@ -62,6 +57,17 @@ export default {
         'Mars', 'Tokyo', 'Amazonia', 'Doohan 6',
         'Eternium', 'Kronos', 'Jupitar',
       ],
+      img: 'http://i.imgur.com/3VvalCh.png',
+    },
+    {
+      make: 'Firefly',
+      model: 'Serenity',
+      description: 'Serenity is a fictional spaceship that appears in Joss Whedons ' +
+      'Firefly television series and related works.',
+      price: 800000,
+      passengers: '50',
+      destinations: ['Mars', 'San Francisco', 'Moon', 'Ariel', 'Beaumonde', 'Haven'],
+      img: 'http://i.imgur.com/TDE6Daq.jpg',
     },
   ],
 };
