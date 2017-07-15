@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container">
-      <img class="logo" src="./assets/logo.png">
+      <img class="logo" src="http://freevector.co/wp-content/uploads/2012/12/86581-spaceship.png">
       <p>
         <!-- use v-link directive for navigation. -->
         <a v-link="{ path: '/' }" class="link">Home  </a>
