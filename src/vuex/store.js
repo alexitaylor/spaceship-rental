@@ -24,7 +24,7 @@ const state = {
 // mutations must be synchronous and can be recorded by plugins
 // for debugging purposes.
 const mutations = {
-  updateSpaceshipList(ships) {
+  updateSpaceshipList(placeholder, ships) {
     console.log('----------', ships);
     state.spaceshipList = ships;
   },

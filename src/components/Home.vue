@@ -77,6 +77,7 @@
   import Multiselect from 'vue-multiselect';
   import spaceships from '../data/spaceships';
   import filters from '../services/filters';
+  import { mapActions } from 'vuex';
 
   export default {
     components: { Multiselect },
@@ -182,25 +183,31 @@
         );
       },
     },
-    methods: {
-      updateFromDestination(destination) {
-        this.selectedFromDestination = destination;
-      },
-      updateToDestination(destination) {
-        this.selectedToDestination = destination;
-      },
-      updatePrice(price) {
-        console.log(price.priceFilter);
-        this.selectedPriceRange = price.priceFilter;
-      },
-      updateSize(size) {
-        this.selectedSize = size.sizeFilter;
-      },
-      searchShips() {
-        const ship = this.spaceships;
-        this.$store.commit('updateSpaceshipList', { ship });
-      },
-    },
+    methods:
+      Object.assign({},
+        mapActions([
+          'updateSpaceshipList',
+        ]),
+        {
+          updateFromDestination(destination) {
+            this.selectedFromDestination = destination;
+          },
+          updateToDestination(destination) {
+            this.selectedToDestination = destination;
+          },
+          updatePrice(price) {
+            console.log(price.priceFilter);
+            this.selectedPriceRange = price.priceFilter;
+          },
+          updateSize(size) {
+            this.selectedSize = size.sizeFilter;
+          },
+          searchShips() {
+            const ship = this.spaceships;
+            this.$store.commit('updateSpaceshipList', ship);
+          },
+        },
+      ),
   };
 </script>
 

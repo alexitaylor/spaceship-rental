@@ -98,7 +98,8 @@
       };
     },
     created() {
-      this.spaceships = spaceships.spaceships;
+      console.log('I was creeeeateeddd', this.$store.state.spaceshipList);
+      this.spaceships = this.$store.state.spaceshipList || spaceships.spaceships;
     },
     watch: {
       departureDate(date) {
