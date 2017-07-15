@@ -23,7 +23,9 @@
     "vue-multiselect": "^1.1.5",
     "vue-router": "^0.7.12",
     "vue-select": "github:sagalbot/vue-select",
-    "vuetify": "^0.13.1"
+    "vuetify": "^0.13.1",
+    "vuex": "^2.3.1",
+    "vuex-router-sync": "^4.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

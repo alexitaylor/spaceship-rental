@@ -5,9 +5,7 @@
       <div class="col s12">
         <div class="card-panel teal">
           <span class="white-text">
-
-            <h4>{{ selectedPriceRange }}</h4>
-
+            <h1>{{ msg }}</h1>
             <!-- Departure and Return DATE -->
             <div class="row">
               <div class="col s6"><p>Departure Date</p></div>
@@ -66,7 +64,7 @@
               </div>
             </div>
 
-            <a v-link="{ path: '/list' }" class="waves-effect waves-light btn" v-bind:class="{ 'disabled': !isDisableSearch }">Search</a>
+            <a v-link="{ path: '/list' }" class="waves-effect waves-light btn" v-on:click="searchShips">Search</a>
 
           </span>
         </div>
@@ -84,7 +82,7 @@
     components: { Multiselect },
     data() {
       return {
-        msg: 'Hello World!',
+        msg: 'Search for a Spaceship',
         spaceships: [],
         departureDate: '',
         returnDate: '',
@@ -96,7 +94,6 @@
         toDestinations: [],
         prices: [],
         sizes: {},
-        isDisableSearch: false,
         allDestinations: [
           'San Francisco', 'New York', 'Wroclaw', 'Moon',
           'Mars', 'Pluto', 'Tatooine', 'Hooth', 'Naboo',
@@ -165,7 +162,6 @@
         );
       },
       selectedPriceRange(price) {
-        console.log('priiiice', price);
         this.spaceships = filters.filterAll(
           this.departureDate,
           this.returnDate,
@@ -200,6 +196,10 @@
       updateSize(size) {
         this.selectedSize = size.sizeFilter;
       },
+      searchShips() {
+        const ship = this.spaceships;
+        this.$store.commit('updateSpaceshipList', { ship });
+      },
     },
   };
 </script>
@@ -208,7 +208,7 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   h1 {
-    color: #42b983;
+    color: white;
   }
 
   p {

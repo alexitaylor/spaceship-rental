@@ -1,9 +1,11 @@
 import Vue from 'vue';
-import App from './App';
 import VueRouter from 'vue-router';
+import App from './App';
 import Home from './components/Home.vue';
 import SpaceshipList from './components/SpaceshipList.vue';
 import Spaceship from './components/Spaceship.vue';
+import store from './vuex/store';
+// import { sync } from 'vuex-router-sync';
 
 Vue.use(VueRouter);
 
@@ -32,7 +34,12 @@ router.map({
   },
 });
 
+// sync(store, router);
 // Now we can start the app!
 // The router will create an instance of App and mount to
 // the element matching the selector #app.
-router.start(App, 'app');
+// router.start(App, 'app');
+router.start({
+  store,
+  components: { App },
+}, 'body');
