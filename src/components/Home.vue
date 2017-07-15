@@ -3,7 +3,7 @@
 
     <div class="row">
       <div class="col s12">
-        <div class="card-panel teal">
+        <div class="card-panel">
           <span class="white-text">
             <h1>{{ msg }}</h1>
             <!-- Departure and Return DATE -->
@@ -231,12 +231,24 @@
   }
 
   .date-input:hover {
-    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21) !important;
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19) !important;
   }
 
   .select-label {
     color: white;
     font-size: 1em;
+  }
+
+  .card-panel {
+    background-color: #3aa576;
+  }
+
+  .btn {
+    background-color: #41B883;
+  }
+
+  .btn:hover {
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
   }
 
 </style>

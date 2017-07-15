@@ -1,46 +1,56 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-
-    <h2 class="header">Filters</h2>
-    <a class="waves-effect waves-light btn" v-on:click="clearFilters">Clear Filters</a>
-
-    <!-- Departure and Return DATE -->
     <div class="row">
-      <div class="col s3 offset-s3"><p>Departure Date</p></div>
-      <div class="col s3"><p>Return Date</p></div>
-      <div class="col s3 offset-s3"><input v-model="departureDate" type="date" class="datepicker date-input" placeholder="Departure Date"></div>
-      <div class="col s3"><input v-model="returnDate" type="date" class="datepicker date-input" placeholder="Return Date"></div>
+      <div class="col s8 offset-s2">
+        <div class="card-panel z-depth-4">
+
+          <!-- Departure and Return DATE -->
+          <div class="row">
+            <div class="col s5 offset-s1"><p>Departure Date</p></div>
+            <div class="col s5"><p>Return Date</p></div>
+            <div class="col s5 offset-s1"><input v-model="departureDate" type="date" class="datepicker date-input" placeholder="Departure Date"></div>
+            <div class="col s5"><input v-model="returnDate" type="date" class="datepicker date-input" placeholder="Return Date"></div>
+          </div>
+
+          <div class="row">
+
+            <div class="col s5 offset-s1">
+              <ul class="pagination">
+                <!-- PRICE range -->
+                <li class="waves-effect price" v-bind:class="{ 'active': isOne }" v-on:click="updatePriceFilter(1)"><a>$</a></li>
+                <li class="waves-effect price" v-bind:class="{ 'active': isTwo }" v-on:click="updatePriceFilter(2)"><a>$$</a></li>
+                <li class="waves-effect price" v-bind:class="{ 'active': isThree }" v-on:click="updatePriceFilter(3)"><a>$$$</a></li>
+                <li class="waves-effect price" v-bind:class="{ 'active': isFour }" v-on:click="updatePriceFilter(4)"><a>$$$$</a></li>
+              </ul>
+            </div>
+
+            <div class="col s5">
+              <!-- Spaceship SIZE range -->
+              <i class="fa fa-rocket fa-2x" v-bind:class="{ 'fa-active': isFa1 }" v-on:click="updateSizeFilter(1)" aria-hidden="true"></i>
+              <i class="fa fa-rocket fa-3x" v-bind:class="{ 'fa-active': isFa2 }" v-on:click="updateSizeFilter(2)" aria-hidden="true"></i>
+              <i class="fa fa-rocket fa-4x" v-bind:class="{ 'fa-active': isFa3 }" v-on:click="updateSizeFilter(3)" aria-hidden="true"></i>
+            </div>
+
+            <div class="col s10 offset-s1">
+              <!-- Spaceship's destinations -->
+              <multiselect
+                :selected="selected",
+                :options="destinations",
+                @update="updateDestination",
+                placeholder="Select Destination",
+              >
+              </multiselect>
+            </div>
+
+              <!-- Clear Filters Button -->
+              <a class="waves-effect waves-light btn btn-clear" v-on:click="clearFilters">Clear Filters</a>
+
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="row">
-      <div class="col s3 offset-s3">
-        <ul class="pagination">
-          <!-- PRICE range -->
-          <li class="waves-effect price" v-bind:class="{ 'active': isOne }" v-on:click="updatePriceFilter(1)"><a>$</a></li>
-          <li class="waves-effect price" v-bind:class="{ 'active': isTwo }" v-on:click="updatePriceFilter(2)"><a>$$</a></li>
-          <li class="waves-effect price" v-bind:class="{ 'active': isThree }" v-on:click="updatePriceFilter(3)"><a>$$$</a></li>
-          <li class="waves-effect price" v-bind:class="{ 'active': isFour }" v-on:click="updatePriceFilter(4)"><a>$$$$</a></li>
-        </ul>
-      </div>
-      <div class="col s3">
-        <!-- Spaceship SIZE range -->
-        <i class="fa fa-rocket fa-2x" v-bind:class="{ 'fa-active': isFa1 }" v-on:click="updateSizeFilter(1)" aria-hidden="true"></i>
-        <i class="fa fa-rocket fa-3x" v-bind:class="{ 'fa-active': isFa2 }" v-on:click="updateSizeFilter(2)" aria-hidden="true"></i>
-        <i class="fa fa-rocket fa-4x" v-bind:class="{ 'fa-active': isFa3 }" v-on:click="updateSizeFilter(3)" aria-hidden="true"></i>
-      </div>
-      <div class="col s6 offset-s3">
-        <!-- Spaceship's destinations -->
-        <multiselect
-          :selected="selected",
-          :options="destinations",
-          @update="updateDestination",
-          placeholder="Select Destination",
-        >
-        </multiselect>
-      </div>
-    </div>
-
+      <!-- Rendered list of Spaceships -->
       <div class="row">
         <div class="col s6" v-for="(index, ship) in spaceships">
           <div class="card horizontal">
@@ -98,7 +108,11 @@
       };
     },
     created() {
-      this.spaceships = this.$store.state.spaceshipList || spaceships.spaceships;
+      if (this.$store.state.spaceshipList.length <= 0) {
+        this.spaceships = spaceships.spaceships;
+      } else {
+        this.spaceships = this.$store.state.spaceshipList;
+      }
     },
     watch: {
       departureDate(date) {
@@ -192,7 +206,7 @@
   }
 
   .pagination li.active {
-    background-color: #42b983 !important;
+    background-color: #41B883 !important;
   }
 
   .price:hover {
@@ -200,10 +214,14 @@
   }
 
   .fa-active {
-    color: #42b983;
+    color: #41B883;
   }
 
   .fa:hover {
     color: #78cfa8;
+  }
+
+  .btn-clear {
+    margin-top: 5%;
   }
 </style>
