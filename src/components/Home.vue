@@ -196,7 +196,6 @@
             this.selectedToDestination = destination;
           },
           updatePrice(price) {
-            console.log(price.priceFilter);
             this.selectedPriceRange = price.priceFilter;
           },
           updateSize(size) {

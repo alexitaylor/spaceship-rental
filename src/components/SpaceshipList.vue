@@ -98,7 +98,6 @@
       };
     },
     created() {
-      console.log('I was creeeeateeddd', this.$store.state.spaceshipList);
       this.spaceships = this.$store.state.spaceshipList || spaceships.spaceships;
     },
     watch: {
@@ -121,7 +120,6 @@
         );
       },
       currentPriceFilter(price) {
-        console.log('priiiice', price);
         this.spaceships = filters.filterAll(
           this.departureDate,
           this.returnDate,
